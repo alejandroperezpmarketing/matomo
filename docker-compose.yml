@@ -47,6 +47,19 @@ services:
     networks:
       - mysql
 
+
+  # Apache Server
+  apache:
+    image: httpd:latest
+    container_name: apache_01
+    restart: always
+    ports:
+      - ${FORWARDED_PORT_APACHE}:80 # Exponer Apache en el puerto 8080
+    volumes:
+      - ./apache_data:/usr/local/apache2/htdocs  # Directorio de archivos web
+    networks:
+      - mysql
+
 networks:
   mysql:
     driver: bridge
